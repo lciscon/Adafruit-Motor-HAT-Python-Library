@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import re
 import smbus
+import os
 
 # ===========================================================================
 # Adafruit_I2C Class
@@ -11,6 +12,15 @@ class Adafruit_I2C(object):
   @staticmethod
   def getPiRevision():
     "Gets the version number of the Raspberry Pi board"
+
+    # First, try to match some non-Raspberry Pi boards such as UP
+    dmi_board_name = '/sys/devices/virtual/dmi/id/board_name'
+    if os.path.isfile(dmi_board_name) and os.access(dmi_board_name, os.R_OK):
+      board_name = open(dmi_board_name).readline()
+      if 'UP-CHT' in board_name:
+        # UP board - compatible with Raspberry Pi revision 2
+        return 2
+
     # Revision list available at: http://elinux.org/RPi_HardwareHistory#Board_Revision_History
     try:
       with open('/proc/cpuinfo', 'r') as infile:
