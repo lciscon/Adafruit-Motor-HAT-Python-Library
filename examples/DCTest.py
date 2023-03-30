@@ -17,7 +17,7 @@ def turnOffMotors():
 atexit.register(turnOffMotors)
 
 ################################# DC motor test!
-myMotor = mh.getMotor(3)
+myMotor = mh.getMotor(1)
 
 # set the speed to start, from 0 (off) to 255 (max speed)
 myMotor.setSpeed(150)
@@ -27,32 +27,32 @@ myMotor.run(Adafruit_MotorHAT.RELEASE);
 
 
 while (True):
-	print "Forward! "
+	print("Forward! ")
 	myMotor.run(Adafruit_MotorHAT.FORWARD)
 
-	print "\tSpeed up..."
+	print("\tSpeed up...")
 	for i in range(255):
 		myMotor.setSpeed(i)
 		time.sleep(0.01)
 
-	print "\tSlow down..."
+	print("\tSlow down...")
 	for i in reversed(range(255)):
 		myMotor.setSpeed(i)
 		time.sleep(0.01)
 
-	print "Backward! "
+	print("Backward! ")
 	myMotor.run(Adafruit_MotorHAT.BACKWARD)
 
-	print "\tSpeed up..."
+	print("\tSpeed up...")
 	for i in range(255):
 		myMotor.setSpeed(i)
 		time.sleep(0.01)
 
-	print "\tSlow down..."
+	print("\tSlow down...")
 	for i in reversed(range(255)):
 		myMotor.setSpeed(i)
 		time.sleep(0.01)
 
-	print "Release"
+	print("Release")
 	myMotor.run(Adafruit_MotorHAT.RELEASE)
 	time.sleep(1.0)
